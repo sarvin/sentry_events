@@ -1,20 +1,14 @@
 import csv
 import json
+import os
 from typing import Dict, List
 
 import requests
-import vcr
+import vcr  # type: ignore
 
 from fdr_cc_references import FDRCC_TO_CC_ACCOUNT_UUID
 
-RESPONSE_BODY_TO_SKIP = [
-    '{"error":"Couldn\'t perform \'get-chronicle-memos_account\' action: Failed!"}',
-    '{"error":"Couldn\'t perform \'update_credit_bureau_score\' action: Cannot update credit score because of invalid credit date"}',
-    '{"error":"Couldn\'t perform \'get_pending_and_declined_transactions\' action: Failure on [Filtered]: Error when connecting to First Data REST API"}',
-    '{"error":"Couldn\'t perform \'get_cycle_posted_transactions\' action: Failure on [Filtered]: Error when connecting to First Data REST API"}',
-    '{"error":"Couldn\'t perform \'get_statement_history\' action: Failure on [Filtered]: Error when connecting to First Data REST API"}',
-    '{"error":"Couldn\'t perform \'create_account\' action: Failure on account creation: Error when connecting to First Data REST API"}',
-]
+RESPONSE_BODY_TO_SKIP: List[str] = []
 
 
 class Sentry:
@@ -23,9 +17,7 @@ class Sentry:
     ENDPOINT = "https://sentry.io/api/0/"
 
     def __init__(self):
-        self.user_token = (
-            ""
-        )
+        self.user_token = os.environ.get("SENTRY_TOKEN")
         self.session = requests.Session()
         self.session.headers.update({"Authorization": f"Bearer {self.user_token}"})
 
