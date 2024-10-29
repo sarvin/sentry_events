@@ -1,0 +1,4 @@
+requests
+stubs==1.0.0
+types-requests==2.32.0.20241016
+vcrpy
