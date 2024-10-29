@@ -55,10 +55,14 @@
 		"UNSPLASH_CLIENT_ID": "hHaHrDkSoim4t-6cMp0mHNwyegEEUUNcYNL2GtvQuFw"
 	},
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	"onCreateCommand": "apt-get update && apt-get install -y openssh-client git && pip install --upgrade pip && pip install pylint mypy types-pytz ipython"
+	"onCreateCommand": "pip install --upgrade pip && pip install pylint mypy types-pytz ipython",
 
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	"runArgs": [
+		"--env-file",
+		".env"
+	]
 
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],

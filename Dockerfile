@@ -1,6 +1,6 @@
 FROM python:3.13-slim-bookworm as builder
 COPY requirements.txt .
-ARG RUN_DEPS=""
+ARG RUN_DEPS="openssh-client git"
 ### Required for Python modules mysqlclient and cryptography
 ARG BUILD_DEPS="build-essential"
 
